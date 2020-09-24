@@ -47,7 +47,7 @@ client.on("message", async (message) => {
           if ((await command(message)) !== false) return
         } catch (error) {
           console.error(error)
-          if (message.channel instanceof Discord.GuildChannel) {
+          if (message.channel instanceof Discord.TextChannel) {
             message.channel.send(`Error: ${error.message}`).catch(client.throw)
           }
           return
