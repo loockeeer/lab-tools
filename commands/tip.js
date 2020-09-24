@@ -1,22 +1,25 @@
-const regex = /^(tip) (push|get|template).+/gi
+const regex = /^tip (push|get|template).+/i
 
 module.exports = (message) => {
-  if(!regex.test(message.content)) return false;
-  console.log("bite");
-  const args = message.content.split(/\s+/);
-  
+  if (!regex.test(message.content)) return false
+  const args = message.content.split(/\s+/)
+
   switch (args[1]) {
-    case 'push': {
-      const link = args[2].split('/')
-      const messageChannel = message.guild.channels.cache.get(link[5]);
-      if (!messageChannel) return message.channel.send(`Salon non trouvé : ${link[5]}`)
-      const tip = messageChannel.messages.fetch(link[6]);
-      if (!tip) return message.channel.send(`Message non trouvé : ${link[6]}`);
+    case "push": {
+      const link = args[2].split("/")
+      
+      const messageChannel = message.guild.channels.cache.get(link[5])
+      if (!messageChannel)
+        return message.channel.send(`Salon non trouvé : ${link[5]}`)
+      
+      const tip = messageChannel.messages.fetch(link[6])
+      if (!tip)
+        return message.channel.send(`Message non trouvé : ${link[6]}`)
       // après, j'ai la flemme aigüe :harold:
-      break;
+      break
     }
-    
-    case 'template': {
+
+    case "template": {
       return message.channel.send(`
 **Nom**
 
